@@ -131,9 +131,21 @@ export default class App {
           anchorTask.classList.add('hidden');
         } else {
           e.closest('.task').classList.add('hidden');
+          // anchorTask.classList.remove('hidden');
+        }
+      }
+    });
+
+    tasksText.every((e, i) => {
+      const containsPinned = e.closest('.task').parentElement.classList.contains('pinned');
+      if (containsPinned === false) {
+        if (e.closest('.task').classList.length === 1) return false;
+
+        if (i === tasksText.length - 1) {
           anchorTask.classList.remove('hidden');
         }
       }
+      return true;
     });
   }
 }
