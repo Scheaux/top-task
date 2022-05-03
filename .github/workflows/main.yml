@@ -4,14 +4,13 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
   workflow_dispatch:
 
 jobs:
-
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -20,19 +19,17 @@ jobs:
       - uses: actions/checkout@v3
 
       - run: npm install
-      
+
       - run: npm run build
-      
+
       - run: npm lint && npm test
-      
+
       - name: Deploy to GitHub Pages
   # You may pin to the exact commit or the version.
   # uses: JamesIves/github-pages-deploy-action@8817a56e5bfec6e2b08345c81f4d422db53a2cdc
   uses: JamesIves/github-pages-deploy-action@v4.3.3
   with:
     # This option allows you to define a private SSH key to be used in conjunction with a repository deployment key to deploy using SSH. The private key should be stored in the `secrets / with` menu **as a secret**. The public should be stored in the repositories deployment keys menu and be given write access.
-Alternatively you can set this field to `true` to enable SSH endpoints for deployment without configuring the ssh client. This can be useful if you've already setup the SSH client using another package or action in a previous step.
-
     ssh-key: secrets.TOKEN
     # This option defaults to the repository scoped GitHub Token.  However if you need more permissions for things such as deploying to another repository, you can add a Personal Access Token (PAT) here.  This should be stored in the `secrets / with` menu **as a secret**.
     branch: gh-pages
